@@ -74,8 +74,8 @@
           <p data-aos="fade-up" data-aos-delay="100">这个平台可以帮助您快速知道所要旅游城市的具体资料，包括天气、地理信息、空气质量等等，我们致力于帮您打造属于您的绝佳旅游计划，帮助您增加旅游体验感。</p>
 
           <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">
-            <input type="text" class="form-control" placeholder="搜索城市">
-            <button type="submit" class="btn btn-primary">搜索</button>
+            <input id="search-input" type="text" class="form-control" placeholder="搜索城市">
+            <button id="search-btn" type="submit" class="btn btn-primary">搜索</button>
           </form>
 
           <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
@@ -85,10 +85,7 @@
                 <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
                 <p>当前使用者</p>
               </div>
-            </div><!-- End Stats Item -->
-
-            
-            
+            </div><!-- End Stats Item -->      
           </div>
         </div>
 
@@ -140,7 +137,7 @@
 
       </div>
     </section><!-- End Featured Services Section -->
-   
+
     <!-- 地图组件 -->
     <!-- ======= Featured Services Section ======= -->
     <section id="featured-services" class="featured-services">
@@ -379,6 +376,34 @@
 
 <!-- Template Main JS File -->
 <script src="assets/js/main.js"></script>
+
+
+<script>
+function handleResponse(response) {
+  // 在这里处理接收到的数据
+  console.log(response);
+}
+
+// 获取搜索按钮和输入框的引用
+var searchBtn = document.getElementById("search-btn");
+var searchInput = document.getElementById("search-input");
+
+// 监听按钮的点击事件
+searchBtn.addEventListener("click", function(event) {
+    event.preventDefault(); // 阻止表单提交的默认行为
+
+    var address = searchInput.value; // 获取输入框的值
+    console.log(address); // 在控制台输出搜索的内容
+    var apiKey = "B0n1xpqHOG8aowwEx2BH67qtxqLGiMAy"; // 替换为您的百度地图API密钥
+    var url = "https://api.map.baidu.com/geocoding/v3/?address="+address+"&output=json&ak=B0n1xpqHOG8aowwEx2BH67qtxqLGiMAy"
+
+    // 创建一个动态生成的 script 标签
+var script = document.createElement('script');
+script.src = url + '&callback=handleResponse'; // 将回调函数名传递给 API
+document.body.appendChild(script);
+})
+
+</script>
 </body>
 
 </html>
